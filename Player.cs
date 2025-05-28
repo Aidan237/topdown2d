@@ -12,6 +12,7 @@ public partial class Player : Area2D
 	public override void _Ready()
 	{
 		screenSize = GetViewportRect().Size;
+		Position = GetViewportRect().GetCenter();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
