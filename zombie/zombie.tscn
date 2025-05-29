@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7pqu3ki31ilj"]
+
+[ext_resource type="Script" uid="uid://dblfrw88dmeyp" path="res://zombie/Zombie.cs" id="1_ixsl6"]
+[ext_resource type="Texture2D" uid="uid://bpcqgln87yqxv" path="res://zombie/textures/zombie.png" id="2_fsm1j"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ymihc"]
+radius = 21.0
+height = 68.0
+
+[node name="Zombie" type="Area2D"]
+script = ExtResource("1_ixsl6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-17, 0)
+shape = SubResource("CapsuleShape2D_ymihc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("2_fsm1j")
+
+[node name="HealthBarBase" type="ColorRect" parent="."]
+offset_left = -43.0
+offset_top = -51.0
+offset_right = 10.0
+offset_bottom = -43.0
+color = Color(0.807394, 0.158251, 0.0910518, 1)
+
+[node name="HealthBarStatus" type="ColorRect" parent="HealthBarBase"]
+z_index = 1
+offset_right = 53.0
+offset_bottom = 8.0
+color = Color(0.245824, 0.523872, 0.120124, 1)

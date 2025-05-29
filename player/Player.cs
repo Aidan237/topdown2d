@@ -5,6 +5,7 @@ public partial class Player : Area2D
 {
 	[Export]
 	public int Speed { get; set; } = 200;
+	public int maxHealth { get; set; } = 100;
 	
 	public Vector2 ScreenSize;
 	
@@ -12,7 +13,6 @@ public partial class Player : Area2D
 	public override void _Ready()
 	{
 		ScreenSize = GetViewportRect().Size;
-		Position = GetViewportRect().GetCenter();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

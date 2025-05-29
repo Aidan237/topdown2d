@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://c1ojtdr63k4bw"]
+[gd_scene load_steps=3 format=3 uid="uid://c1ojtdr63k4bw"]
 
+[ext_resource type="Script" uid="uid://6hiufjo0ffjs" path="res://Main.cs" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://bimtf1lxm7uog" path="res://player/player.tscn" id="1_ig7tw"]
 
 [node name="Main" type="Node"]
+script = ExtResource("1_0xm2m")
+
+[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("1_ig7tw")]
-speed = 250
+
+[node name="SpawnTimer" type="Timer" parent="."]
