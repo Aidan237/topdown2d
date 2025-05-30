@@ -38,10 +38,6 @@ public partial class Player : Area2D
 		velocity *= Speed;  // velocity is normalized, speed = magnitide
 		
 		Position += velocity * (float)delta;
-		Position = new Vector2(
-			x: Mathf.Clamp(Position.X, 0, ScreenSize.X),
-			y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
-		);
 
 		// Player Direction
 

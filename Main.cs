@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class Main : Node
 {
@@ -8,7 +9,7 @@ public partial class Main : Node
 	public int zombieCount { get; set;} = 3;
 
 	private Area2D player;
-	private List<Area2D> zombies;
+	private List<Node2D> zombies;
 	private Camera2D camera;
 	private Timer spawnTimer;
 	private PackedScene zombieScene;
@@ -21,9 +22,17 @@ public partial class Main : Node
 
 	private void spawnZombie()
 	{
+		// Create new Zombie instance, then add to end of list
 		var zombieInstance = zombieScene.Instantiate();
 		AddChild(zombieInstance);
-		zombies.Add(zombieInstance.GetChild<Area2D>(0));
+		Node2D zombieNode = zombieInstance as Node2D;
+		zombies.Add(zombieNode);
+
+		// Set random spawn location of the newly created Zombie
+		int distance = GD.RandRange(200, 400);
+		float angle = GD.Randf() * 2 * Mathf.Pi;
+		Vector2 spawnOffset = Vector2.FromAngle(angle) * distance;
+		zombieNode.Position = player.Position + spawnOffset;
 	}
 
 	// Called when the node enters the scene tree for the first time.
@@ -31,7 +40,7 @@ public partial class Main : Node
 	{
 		player = GetNode<Area2D>("Player");
 		camera = GetNode<Camera2D>("Camera2D");
-		zombies = new List<Area2D>();
+		zombies = [];
 		spawnTimer = GetNode<Timer>("SpawnTimer");
 		zombieScene = GD.Load<PackedScene>("res://zombie/zombie.tscn");
 		zombiesActive = 0;
@@ -43,5 +52,8 @@ public partial class Main : Node
 	public override void _Process(double delta)
 	{
 		camera.Position = player.Position;
+		Transform2D viewportPosition = new Transform2D();
+		viewportPosition.Origin = camera.Position;
+		GetViewport().CanvasTransform = viewportPosition;
 	}
 }
